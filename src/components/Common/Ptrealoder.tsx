@@ -5,7 +5,6 @@ const Prealoder = (props) => {
     return <div>
         <img src={prealoder} alt="Loading"/>
 
-        {props.wait}
     </div>
 };
 

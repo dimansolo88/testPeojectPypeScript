@@ -50,7 +50,7 @@
 // //
 // //
 // export let renderall = (state) => {
-//     //запускающая сторона в index.js получит satte из  state.js через import
+//     //запускающая сторона в index.ts получит satte из  state.js через import
 //     ReactDOM.render(
 //         <BrowserRouter>
 //             <App astate={state} a={addnewpost} cdx={updatepost} />

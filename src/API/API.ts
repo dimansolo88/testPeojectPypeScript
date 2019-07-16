@@ -1,4 +1,5 @@
-import * as axios from "axios";
+import axios from "axios";
+
 
 
 const instance = axios.create({
@@ -13,7 +14,7 @@ const instance = axios.create({
 
 export const usersAPI = {
 
-    getUsers(currentPage, quantityUsersOnPage) {
+    getUsers(currentPage: number, quantityUsersOnPage: number) {
         return instance.get(`users?page=${currentPage}
         &count=${quantityUsersOnPage}`)
             .then(response => response.data)
@@ -29,14 +30,14 @@ export const usersAPI = {
     //
     // },
 
-    follow(id) {
+    follow(id: number) {
         return instance.post(`follow/${id}`)
 
 
     },
 
 
-    unfoloow(id) {
+    unfoloow(id: number) {
         return instance.delete(`follow/${id}`)
 
     },
@@ -55,16 +56,16 @@ export const profileAPI = {
 
     },
 
-    profileInfo (userid) {
+    profileInfo (userid: number) {
         return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userid)
 
     },
 
-    getProfileStatus (userid) {
+    getProfileStatus (userid: number) {
         return instance.get (`profile/status/` + userid)
     },
 
-    updateProfileStatus (status) {
+    updateProfileStatus (status: string) {
         return instance.put(`profile/status/`, {status:status})
     },
 

@@ -4,6 +4,7 @@ import p from './Dialogs.module.css';
 import Dialogitem from "./Dialogitem/Dialogitem";
 import Dialosmessage from "./Dialosmessage/Dialosmessage";
 import {AddMessageReduxForm} from "./FormSendMessage";
+import {any} from "prop-types";
 // import {sendMessageCreator, updateMessageCreator} from "../../redux/dialogs-reducer";
 
 
@@ -29,9 +30,18 @@ import {AddMessageReduxForm} from "./FormSendMessage";
 
 //
 // 1
-const Dialogs = (props) => {
 
-    const onSubmit = (data) => {
+interface iprops {
+    add: Function,
+    state: any,
+    changemess: Function,
+
+}
+
+
+const Dialogs = (props: iprops) => {
+
+    const onSubmit = (data: any) => {
         console.log(data);
         props.add(data.dialogSendMessage)
 
@@ -54,7 +64,7 @@ const Dialogs = (props) => {
 
     };
 
-    let changeMessage = (e) => {
+    let changeMessage = (e: any) => {
         //let text = textRef.current.value;
         let text = e.target.value;
         props.changemess(text)
@@ -95,7 +105,7 @@ const Dialogs = (props) => {
     // ]
 
     let messageelements =
-        states.messagesdata.map(mess => <Dialosmessage message={mess.message} key={mess.id}/>);
+        states.messagesdata.map(mess  => <Dialosmessage message={mess.message} key={mess.id}/>);
 
 
     return (
