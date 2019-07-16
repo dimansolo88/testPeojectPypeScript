@@ -1,0 +1,57 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+
+.dialogsitems {
+    padding: 10px;
+
+
+}
+
+
+.items {
+
+
+}
+
+
+.messages {
+    padding: 10px;
+
+}
+
+
+.message {
+    font-size: 20px;
+
+
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+
+}
+
+
+.send {
+    padding-top: 15px;
+
+
+}
+
+
+
+.avatar{
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+
+}
+
+
+
+

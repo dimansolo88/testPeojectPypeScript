@@ -1,0 +1,17 @@
+.info {
+    padding-left: 10px;
+}
+
+
+.avatar{
+    width: 200px;
+    height: 200px;
+
+}
+
+.web{
+    font-size: 20px;
+    color: darkred;
+    font-weight: bold;
+
+}

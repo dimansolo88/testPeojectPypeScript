@@ -1,0 +1,32 @@
+.usersWrapper{
+    color: black;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+
+}
+
+
+.avatar{
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+
+}
+
+.numberLInk{
+    font-weight: bolder;
+    font-size: large;
+    cursor: pointer;
+
+
+}
+
+.pageHover:hover{
+    cursor: pointer;
+}
+
+
+
+

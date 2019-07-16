@@ -1,0 +1,19 @@
+
+.header {
+    grid-area: h;
+    background-color: gray;
+
+
+
+}
+
+.header img {
+    width: 20px;
+}
+
+.login{
+    text-align: right;
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+}
