@@ -7,10 +7,14 @@ import thunk from "redux-thunk"
 import { reducer as formReducer } from 'redux-form'
 
 
+
+
 let reducers = combineReducers({
 
     profilepage: profileReducer,
+    // @ts-ignore
     dialogspages: dialoReducer,
+    // @ts-ignore
     usersPages: userReducer,
     auth: authReducer,
     form: formReducer
@@ -19,10 +23,9 @@ let reducers = combineReducers({
 });
 
 
-let store = createStore(reducers, applyMiddleware(thunk));
+let store: any = createStore(reducers, applyMiddleware(thunk));
 
 
-window.store = store;
 
 
 export default store;

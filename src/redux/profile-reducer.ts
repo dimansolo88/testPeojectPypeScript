@@ -3,55 +3,48 @@ let add_post = "ADD-POST";
 // let update_post = "UPDATE-POST";
 // import users from "../assets/images/photoUsersPost.jpg"
 let setProfileUser = "SET-PROFILE-USER";
-let setUserStatus = "SET-PROFILE-STATUS";;
+let setUserStatus = "SET-PROFILE-STATUS";
 let showPrealoder = "SHOW-PREALODER";
 
-
-let initialstate = {
-
+export interface IState {
+    postdata: any[],
+    setProfileUs: any,
+    status: string,
+    isFetching: boolean,
+}
+let initialstate: IState = {
     postdata: [
-        {
-            id: 1,
-            avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
-            message: "today i in first time eated a dog shit, it was great, and me nowbody seen ",
-            like: "1200"
-        },
-        {
-            id: 2,
-            avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
-            message: "hi",
-            like: "34",
-        },
-        {
-            id: 3,
-            avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
-            message: "t is mt first podt",
-            like: "0",
-        },
-        {
-            id: 4,
-            avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
-            message: "all is worse",
-            like: "0",
-        },
+        // {
+        //
+        // },
+        // {
+        //     id: 2,
+        //     avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
+        //     message: "hi",
+        //     like: "34",
+        // },
+        // {
+        //     id: 3,
+        //     avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
+        //     message: "t is mt first podt",
+        //     like: "0",
+        // },
+        // {
+        //     id: 4,
+        //     avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
+        //     message: "all is worse",
+        //     like: "0",
+        // },
 
 
     ],
-
-
-    textmypost: "jjj",
-
     setProfileUs: null,
-
     status: "",
-
-    isFetching: false,
-
-
+    isFetching: false
 };
 
 
-const profileReducer = (state = initialstate, action) => {
+const profileReducer = (state = initialstate, action: any) : IState => {
 
     // let stateCopy;
 
@@ -69,7 +62,7 @@ const profileReducer = (state = initialstate, action) => {
                 ...state,
                 postdata: [...state.postdata, newpost],
                 // stateCopy.postdata.push(newpost);
-                textmypost: ""
+                // textmypost: ""
             };
         // return stateCopy;
 
@@ -127,7 +120,7 @@ const profileReducer = (state = initialstate, action) => {
 // return state;
 
 
-export const addpostActionCreator = (post) => ({
+export const addpostActionCreator = (post: any) => ({
     type: add_post, post
 });
 
@@ -137,15 +130,15 @@ export const addpostActionCreator = (post) => ({
 //
 // });
 
-export const setProfileU = (profile) => ({type: setProfileUser, profile});
+export const setProfileU = (profile: any) => ({type: setProfileUser, profile});
 
-export const setProfileStatus = (status) => ({type: setUserStatus, status});
+export const setProfileStatus = (status: any) => ({type: setUserStatus, status});
 
-export const showPrealoderAC = (isFetching) => ({type:showPrealoder, isFetching });
+export const showPrealoderAC = (isFetching: boolean) => ({type:showPrealoder, isFetching });
 
 
-export const profileInfoThunkCreator = (userid) => {
-    return (dispatch) => {
+export const profileInfoThunkCreator = (userid: number) => {
+    return (dispatch: Function) => {
         profileAPI.profileInfo(userid)
             .then(response => {
                 dispatch(setProfileU(response.data))
@@ -156,8 +149,8 @@ export const profileInfoThunkCreator = (userid) => {
     }
 };
 
-export const getProfileStatusThunkCreator = (userid) => {
-    return (dispatch) => {
+export const getProfileStatusThunkCreator = (userid: number) => {
+    return (dispatch: Function) => {
 
         profileAPI.getProfileStatus(userid)
             .then(response => {
@@ -167,7 +160,7 @@ export const getProfileStatusThunkCreator = (userid) => {
     }
 };
 
-export const updateProfileStatusThunkCreator = (status) => (dispatch) => {
+export const updateProfileStatusThunkCreator = (status: any) => (dispatch: Function) => {
     dispatch(showPrealoderAC(true));
 
     profileAPI.updateProfileStatus(status)

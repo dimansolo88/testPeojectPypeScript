@@ -1,12 +1,26 @@
-// import React from "react";
-import {sendMessageCreator, updateMessageCreator} from "../../redux/dialogs-reducer";
+import {sendMessageCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import React from "react";
 // import {WithAthREdirect} from "../HOC/RedirectComponent";
 
+class DialogsContanier extends React.Component {
+
+    render() {
+        // @ts-ignore
+        return <Dialogs {...this.props} />
+    }
 
 
-const mapStateToProps = (state) => {
+
+
+}
+
+
+
+
+
+const mapStateToProps = (state: any) => {
     return {
         state: state.dialogspages,
         isAuth: state.auth.isAuth,
@@ -16,24 +30,18 @@ const mapStateToProps = (state) => {
 
 
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
-        add: (message) => {
+        add: (message: string) => {
             dispatch(sendMessageCreator(message));
 
         },
-        changemess: (text) => {
-                   dispatch(updateMessageCreator(text))
-                }
 
-    }
 
-};
-
+    };
+}
 
 // let redirect = WithAthREdirect(Dialogs);
+export default connect(mapStateToProps, mapDispatchToProps)(DialogsContanier);
 
 
-const DialogsContanier = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
-
-export default DialogsContanier;

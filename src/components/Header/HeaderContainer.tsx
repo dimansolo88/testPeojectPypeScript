@@ -2,24 +2,17 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {auhMeThunkCreator} from "../../redux/Auth-reducer";
-// import * as axios from 'axios';
 
-class HeaderContainer extends React.Component {
+
+
+interface Iprops {
+    authMe: Function
+
+}
+
+class HeaderContainer extends React.Component <Iprops> {
     componentDidMount() {
 
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{
-        //     withCredentials: true
-        // })
-
-
-        // profileAPI.authMe()
-        //     .then(response => {
-        //         let {id, email, login} = response.data.data;
-        //         if (response.data.resultCode === 0) {this.props.authMe(id,email,login);
-        //
-        //         }
-        //
-        //     })
 
         this.props.authMe()
 
@@ -37,7 +30,7 @@ class HeaderContainer extends React.Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     return {
         isAuth: state.auth.isAuth,
         login: state.auth.login,

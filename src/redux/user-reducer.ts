@@ -23,13 +23,13 @@ let initialeestate = {
 
 };
 
-const userReducer = (state = initialeestate, action) => {
+const userReducer = (state = initialeestate, action: any) => {
     switch (action.type) {
 
 
         case follow:
             return {
-                ...state, users: state.users.map(u => {
+                ...state, users: state.users.map((u:any) => {
                     if (u.id === action.userid)
                         return {...u, followed: true};
                     return u
@@ -38,7 +38,7 @@ const userReducer = (state = initialeestate, action) => {
 
         case unfollow:
             return {
-                ...state, users: state.users.map(users => {
+                ...state, users: state.users.map((users: any) => {
                     if (users.id === action.userid)
                         return {...users, followed: false};
                     return users
@@ -85,37 +85,37 @@ const userReducer = (state = initialeestate, action) => {
 };
 
 
-export const follU = (userid) => ({
+export const follU = (userid: number) => ({
     type: follow, userid
 });
 
 
-export const unFollowActionCreator = (userid) => ({
+export const unFollowActionCreator = (userid: number) => ({
     type: unfollow, userid
 });
 
 
-export const  setUsersActionCreator= (user) => ({
+export const  setUsersActionCreator= (user: any) => ({
     type: setUsersformServer, user
 });
 
-export const setCurrentpagesAC = (currentPages) => ({
+export const setCurrentpagesAC = (currentPages: any) => ({
     type: setCurrentPages, currentPages
 });
 
-export const setTotalUsersFromServerAC = (totalUsers) => ({
+export const setTotalUsersFromServerAC = (totalUsers: any) => ({
     type: setTotalUsersfromServer, totalUsers
 });
 
-export const showPrealoderAC = (isFetching) => ({type:showPrealoder, isFetching });
-export const toogleDiableBotton = (progressDiable, idFromUI) => ({type: followingBotton, progressDiable, idFromUI });
+export const showPrealoderAC = (isFetching: boolean) => ({type:showPrealoder, isFetching });
+export const toogleDiableBotton = (progressDiable: any, idFromUI: any) => ({type: followingBotton, progressDiable, idFromUI });
 
 
 
 
 
-export const setUserThunkCreator = (currentPage, quantityUsersOnPage) => {
-    return  (dispatch) => {
+export const setUserThunkCreator = (currentPage: number, quantityUsersOnPage: number) => {
+    return  (dispatch: Function) => {
 
         dispatch(showPrealoderAC(true));
         usersAPI.getUsers(currentPage,quantityUsersOnPage)
@@ -123,7 +123,7 @@ export const setUserThunkCreator = (currentPage, quantityUsersOnPage) => {
                 dispatch(showPrealoderAC(false));
                 dispatch(setUsersActionCreator(data.items));
                 dispatch(setTotalUsersFromServerAC(data.totalCount));
-                dispatch(setCurrentpagesAC(currentPage,quantityUsersOnPage))
+                dispatch(setCurrentpagesAC(currentPage))  // quantityUsersOnPage To chekking !!!!!!!
             })
 
     }
@@ -133,8 +133,8 @@ export const setUserThunkCreator = (currentPage, quantityUsersOnPage) => {
 
 
 
-export const followThunkCreator = (id) => {
-    return (dispatch) => {
+export const followThunkCreator = (id: any) => {
+    return (dispatch: Function) => {
         dispatch(toogleDiableBotton(true, id));
 
 
@@ -149,8 +149,8 @@ export const followThunkCreator = (id) => {
 };
 
 
-export const unfollowThunkCreator = (id) => {
-    return (dispatch) => {
+export const unfollowThunkCreator = (id: any) => {
+    return (dispatch:Function) => {
         dispatch(toogleDiableBotton(true, id));
         usersAPI.unfoloow(id)
             .then(response => {
@@ -163,7 +163,7 @@ export const unfollowThunkCreator = (id) => {
 
 
 
-}
+};
 
 export default userReducer;
 

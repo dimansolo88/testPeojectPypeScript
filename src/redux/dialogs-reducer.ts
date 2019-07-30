@@ -1,5 +1,5 @@
 let send_message = "SEND-MESSAGE";
-let update_message = "UPDATE-MESSAGE";
+// let update_message = "UPDATE-MESSAGE";
 
 
 let initialstate = {
@@ -27,16 +27,16 @@ let initialstate = {
 };
 
 
-const dialoReducer = (state = initialstate, action) => {
+const dialoReducer = (state = initialstate, action: any) => {
 
 
     switch (action.type) {
-        case update_message:
-
-            return {
-                ...state,
-                textmessage: action.textmessage
-            };
+            //    case update_message:
+            //
+            // return {
+            //     ...state,
+            //     textmessage: action.textmessage
+            // };
 
 
         case send_message:
@@ -72,13 +72,13 @@ const dialoReducer = (state = initialstate, action) => {
 // return state
 
 
-export const sendMessageCreator = (message) => ({
+export const sendMessageCreator = (message: string) => ({
     type: send_message, message
 });
 
-export const updateMessageCreator = (text) => ({
-    type: update_message, textmessage: text
-});
+// export const updateMessageCreator = (text) => ({
+//     type: update_message, textmessage: text
+// });
 
 
 export default dialoReducer;

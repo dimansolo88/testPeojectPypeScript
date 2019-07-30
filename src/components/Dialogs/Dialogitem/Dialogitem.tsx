@@ -2,7 +2,17 @@ import React from "react";
 import style from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
 
-const Dialogitem = (props) => {
+
+
+interface Iprops {
+    avatar:any,
+    id: number,
+    name: string
+
+
+}
+
+const Dialogitem = (props: Iprops) => {
     return (
 
 
