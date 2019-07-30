@@ -10,8 +10,19 @@ import {withRouter} from "react-router-dom";
 // import {WithAthREdirect} from "../HOC/RedirectComponent";
 import {compose} from "redux";
 
+interface Iprops {
 
-class ProfileContainer extends React.Component {
+    match: any,
+    profileInfo: Function,
+    getStatus: Function,
+
+
+
+}
+
+
+
+class ProfileContainer extends React.Component <Iprops> {
 
     componentDidMount() {
 
@@ -21,13 +32,7 @@ class ProfileContainer extends React.Component {
             userid = 1068
 
         }
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userid)
-        // profileAPI.ProfileInfo(userid)
-        //     .then(response => {
-        //         this.props.setProfileU(response.data)
-        //
-        //
-        //     })
+
 
         this.props.profileInfo(userid);
         this.props.getStatus(userid);
@@ -46,11 +51,10 @@ class ProfileContainer extends React.Component {
 
 }
 
-//
-// let redirect = WithAthREdirect(ProfileContainer);
 
 
-let mapStateToProps = (state) => {
+
+let mapStateToProps = (state: any) => {
     return {
         setProfileUser: state.profilepage.setProfileUs,
         isAuth: state.auth.isAuth,
@@ -62,8 +66,8 @@ let mapStateToProps = (state) => {
 
 };
 
-export default compose(
-    connect(mapStateToProps, {profileInfo: profileInfoThunkCreator,
+export default compose <any, any, any> (
+    connect (mapStateToProps, {profileInfo: profileInfoThunkCreator,
         getStatus: getProfileStatusThunkCreator,updateStatus: updateProfileStatusThunkCreator}),
     withRouter,
     // WithAthREdirect

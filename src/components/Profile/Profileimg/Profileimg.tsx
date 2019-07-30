@@ -3,7 +3,7 @@ import style from "./Profileimg.module.css";
 import imageProfile from "../../../assets/images/imageProfile.jpeg"
 
 
-const Profileimg = (props) =>{
+const Profileimg = (props: any) =>{
     return (
         <img  className = {style.profile_img} src={imageProfile}   alt="profile" />
     );

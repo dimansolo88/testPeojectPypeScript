@@ -3,7 +3,7 @@ import n from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 
 
-const Navbar = (props) => {
+const Navbar = (props: any) => {
     return (
         <nav className={n.navbar}>
             navbar

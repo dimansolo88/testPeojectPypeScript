@@ -2,7 +2,15 @@ import React from "react";
 import p from './Post.module.css';
 
 
-const Post = (props) => {
+interface Interface {
+    avatar: any,
+    message: string,
+    like: number,
+
+}
+
+
+const Post = (props: Interface) => {
     return (
         <div className={p.post}>
             <img className={p.img} src={props.avatar} alt="avatar" />

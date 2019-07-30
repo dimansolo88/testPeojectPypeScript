@@ -1,7 +1,25 @@
 import React from "react";
 import Prealoder from "../../Common/Ptrealoder";
 
-class ProfileStatus extends React.Component {
+interface Iprops {
+    status: string,
+    updateStatus: Function,
+    isFetching: boolean,
+
+
+
+
+}
+
+interface Istate {
+    editMode: boolean,
+    status: string,
+
+}
+
+
+
+class ProfileStatus extends React.Component <Iprops, Istate> {
 
     state = {
         editMode: false,
@@ -14,7 +32,7 @@ class ProfileStatus extends React.Component {
         )
     }
 
-    onStatusChange(e) {
+    onStatusChange(e: any) {
         this.setState({status: e.currentTarget.value})
     }
 
@@ -25,7 +43,7 @@ class ProfileStatus extends React.Component {
         this.props.updateStatus(this.state.status)
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: any, prevState: any) {
         if (prevProps.status !== this.props.status) {
             this.setState({
                 status: this.props.status

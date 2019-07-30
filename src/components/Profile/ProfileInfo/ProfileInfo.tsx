@@ -5,7 +5,7 @@ import photos from '../../../assets/images/userPhoto.jpg'
 import ProfileStatus from "./ProfileStatus";
 
 
-const ProfileInfo = (props) => {
+const ProfileInfo = (props: any) => {
 
 
     if (!props.setProfileUser) {  // to fix
@@ -56,8 +56,8 @@ const ProfileInfo = (props) => {
                     </span>
 
                     <span>
-                        {props.setProfileUser.lookingForAJob != null ? "I am not locking for any job "
-                            : props.setProfileUser.lookingForAJob}
+                        {props.setProfileUser.lookingForAJobDescription = null ? "I am not locking for any job "
+                            : props.setProfileUser.lookingForAJobDescription}
                     </span>
                 </div>
 

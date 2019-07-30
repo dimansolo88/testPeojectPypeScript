@@ -4,7 +4,7 @@ import React from "react";
 
 
 
-const News = (props) => {
+const News = (props: any) => {
     return (
         <div>
            news сдесь последгние новости
