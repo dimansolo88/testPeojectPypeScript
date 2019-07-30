@@ -22,7 +22,9 @@ const authReducer = (state = initialstate, action: any) => {
             return {
                 ...state,
                 ...action.payload,
-                isAuth: true,
+                isAuth: action.payload,
+
+
 
 
             };
