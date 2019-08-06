@@ -8,20 +8,26 @@ import { Redirect } from 'react-router';
 
 interface Iprops {
     logIn: Function,
-    isAuth: any
+    isAuth: any,
+    login: any
 }
 
 const Login = (props: Iprops) => {
 
     const onSubmit = (data: any) => {
-        console.log(data);
+        // console.log(data);
         props.logIn(data.email, data.password, data.rememberMe)
 
 
     };
-    if (props.isAuth) {
+
+
+
+    if (props.login) {
         return <Redirect to={'/profile'}/>
     }
+
+
 
 
 
@@ -38,6 +44,7 @@ const Login = (props: Iprops) => {
 
 const mapStateToProps = (state: any) => ({
     isAuth: state.auth.isAuth,
+    login: state.auth.login,
 
 });
 

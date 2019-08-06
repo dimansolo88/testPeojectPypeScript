@@ -23,8 +23,12 @@ let reducers = combineReducers({
 });
 
 
+
+
 let store: any = createStore(reducers, applyMiddleware(thunk));
 
+// @ts-ignore
+window.store = store
 
 
 
