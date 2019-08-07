@@ -1,8 +1,8 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
-import { rehired } from '../../Utilites/Validation/validation';
-import { Input } from '../Common/ValidationForm/ValidationTextarea';
-
+import {rehired} from '../../Utilites/Validation/validation';
+import {Input} from '../Common/ValidationForm/ValidationTextarea';
+import style from '../Common/ValidationForm/texareaValidation.module.css'
 
 
 const LoginForm = (props: any) => {
@@ -12,12 +12,14 @@ const LoginForm = (props: any) => {
 
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field validate={[rehired]} component={Input} name={'email'} placeholder={"enter yor login or e mail"} type="text"/>
+                <Field validate={[rehired]} component={Input} name={'email'} placeholder={"enter yor login or e mail"}
+                       type="text"/>
 
             </div>
 
             <div>
-                <Field  validate={[rehired]} component={Input} name={"password"} placeholder={"enter your password"} type="password"/>
+                <Field validate={[rehired]} component={Input} name={"password"} placeholder={"enter your password"}
+                       type="password"/>
 
             </div>
 
@@ -25,6 +27,11 @@ const LoginForm = (props: any) => {
                 <Field component={"input"} name={"rememberMe"} type="checkbox"/> remember me
 
             </div>
+
+            {props.error && <div className={style.showError}>
+                <span> {props.error} </span>
+
+            </div>}
 
 
             <div>
