@@ -42,7 +42,7 @@ export const authMe = (userId: any, email: any, login: any,isAuth:boolean ) => (
 
 export const auhMeThunkCreator = () => {
     return (dispatch: Function) => {
-        profileAPI.authMe()
+       return profileAPI.authMe()
             .then(response => {
                 let {id, email, login} = response.data.data;
                 if (response.data.resultCode === 0) {

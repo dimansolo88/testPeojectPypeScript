@@ -2,6 +2,8 @@ import {sendMessageCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import React from "react";
+import {compose} from "redux";
+import { WithAthREdirect } from "../HOC/RedirectComponent";
 // import {WithAthREdirect} from "../HOC/RedirectComponent";
 
 class DialogsContanier extends React.Component {
@@ -42,6 +44,8 @@ const mapDispatchToProps = (dispatch: Function) => {
 }
 
 // let redirect = WithAthREdirect(Dialogs);
-export default connect(mapStateToProps, mapDispatchToProps)(DialogsContanier);
+export default compose <any, any,any> (
+
+connect(mapStateToProps, mapDispatchToProps),WithAthREdirect)(DialogsContanier);
 
 

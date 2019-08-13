@@ -1,22 +1,14 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {auhMeThunkCreator, logOutThunkCreator} from "../../redux/Auth-reducer";
+import { logOutThunkCreator} from "../../redux/Auth-reducer";
 
 
 
-interface Iprops {
-    authMe: Function
-
-}
-
-class HeaderContainer extends React.Component <Iprops> {
-    componentDidMount() {
 
 
-        this.props.authMe()
+class HeaderContainer extends React.Component <any> {
 
-    }
 
 
     render() {
@@ -39,6 +31,6 @@ const mapStateToProps = (state: any) => {
 };
 
 
-export default connect <any, any, any>(mapStateToProps, {authMe:auhMeThunkCreator,
+export default connect <any, any, any>(mapStateToProps, {
     logOut:logOutThunkCreator})(HeaderContainer);
 
