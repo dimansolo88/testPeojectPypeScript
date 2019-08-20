@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
 import React from "react";
-// import * as axios from "axios";
 import Users from "./Users";
 import {
     followThunkCreator, setUserThunkCreator, unfollowThunkCreator
@@ -100,17 +99,18 @@ const mapStateToProps = (state: any) => {
         quantityUsersOnPage: state.usersPages.quantityUsersOnPage,
         currentPage: state.usersPages.currentPage,
         isFetching: state.usersPages.isFetching,
-        followingProgress: state.usersPages.followingProgress
+        followingProgress: state.usersPages.followingProgress,
+
 
 
     }
 };
 
 
-export default connect<any, any, any>(mapStateToProps, {
+export default  connect <any, any, any> (mapStateToProps, {
     setUserThunkCreator, followThunkCreator,
     unfollowThunkCreator
-})(UsersContanier);
+}) (UsersContanier);
 
 
 

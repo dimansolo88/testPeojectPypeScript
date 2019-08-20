@@ -52,8 +52,9 @@ class App extends Component <Iprops> {
                 <div className="app-wrapper-content">
 
 
-                    <Route path="/dialogs" render={() =>
+                    <Route path="/dialogs/:userId?" render={() =>
                         <DialogsContanier/>}/>
+
 
                     <Route path="/profile/:userid?" render={() => <ProfileContainer/>}/>
                     <Route path="/news" component={News}/>

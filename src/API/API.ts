@@ -52,7 +52,9 @@ export const usersAPI = {
 export const profileAPI = {
 
     authMe() {
-        return instance.get(`auth/me`)
+        console.warn("please to use the new method: authAPI.authM")
+        return authAPI.authMe()
+        // return instance.get(`auth/me`)
 
 
     },
@@ -72,6 +74,27 @@ export const profileAPI = {
 
 
     logIn (email: string, password: string, rememberMe:boolean = false) {
+        console.warn("please to use the new method: authAPI.logIN")
+        return authAPI.logIn(email, password, rememberMe)
+
+        // return instance.post(`auth/login`, {email, password, rememberMe} )
+    },
+
+    logOut () {
+        console.warn("please to use the new method: authAPI.logOut")
+        return authAPI.logOut()
+        // return instance.delete(`auth/login` )
+    },
+
+};
+
+
+export const authAPI = {
+    authMe () {
+        return instance.get(`auth/me`)
+    },
+
+    logIn (email: string, password: string, rememberMe:boolean = false) {
 
         return instance.post(`auth/login`, {email, password, rememberMe} )
     },
@@ -81,5 +104,31 @@ export const profileAPI = {
         return instance.delete(`auth/login` )
     },
 
-};
+}
+
+export const dialogAPI = {
+
+    getDialogs () {
+        return instance.get(`dialogs`).then(
+            res => res.data
+        )
+    },
+
+    startDialog (userId:number) {
+        return instance.put(`dialogs/${userId}`).then(
+            response => response.data
+        )
+    },
+
+    getMessages(userId:number) {
+        return instance.get(`dialogs/${userId}/messages`).then(
+            response => response.data.items)
+    },
+
+    sendMessages (userId:number, body:string) {
+        return  instance.post(`dialogs/${userId}`, {body}).then(
+            response => response.data)
+    }
+
+}
 

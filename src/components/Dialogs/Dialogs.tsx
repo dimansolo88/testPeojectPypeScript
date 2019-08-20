@@ -1,13 +1,14 @@
 import React from "react";
 import p from './Dialogs.module.css';
 import Dialogitem from "./Dialogitem/Dialogitem";
-import Dialosmessage from "./Dialosmessage/Dialosmessage";
 import {AddMessageReduxForm} from "./FormSendMessage";
+import Dialosmessage from "./Dialosmessage/Dialosmessage";
 
 
 interface iprops {
     add: Function,
     state: any,
+    messageData:any[]
 
 
 }
@@ -26,13 +27,9 @@ const Dialogs = (props: iprops) => {
 
 
     let dialogselements =
-        states.dialogsdata.map((dialog: any) => <Dialogitem name={dialog.name} key={dialog.id}
-                                                            id={dialog.id} avatar={dialog.avatar}/>);
+        states.dialogsdata.map((dialog: any) => <Dialogitem name={dialog.userName} key={dialog.id}
+                                                            id={dialog.id} />);
 
-
-    let messageelements =
-        states.messagesdata.map((mess: { message: string; id: number }) => <Dialosmessage message={mess.message}
-                                                                                          key={mess.id}/>);
 
 
     return (
@@ -48,8 +45,10 @@ const Dialogs = (props: iprops) => {
 
             <div className={p.messages}>
 
+                <Dialosmessage messageData={props.messageData} />
 
-                {messageelements}
+
+
 
 
                 <AddMessageReduxForm onSubmit={onSubmit}/>

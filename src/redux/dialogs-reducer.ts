@@ -1,15 +1,18 @@
+import { dialogAPI } from "../API/API";
+
 let send_message = "SEND-MESSAGE";
 // let update_message = "UPDATE-MESSAGE";
+let GET_DIALOGS_SUCCESS = "GET_DIALOGS";
 
 
 let initialstate = {
 
     dialogsdata: [
-        {id: "alina", name: "Alina", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
-        {id: "bazil", name: "Bazil", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
-        {id: "matsal", name: "Matsal", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
-        {id: "herman", name: "Herman", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
-        {id: "timur", name: "Timur", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"}
+        // {id: "alina", name: "Alina", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
+        // {id: "bazil", name: "Bazil", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
+        // {id: "matsal", name: "Matsal", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
+        // {id: "herman", name: "Herman", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
+        // {id: "timur", name: "Timur", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"}
     ],
 
     messagesdata: [
@@ -37,6 +40,11 @@ const dialoReducer = (state = initialstate, action: any) => {
             //     ...state,
             //     textmessage: action.textmessage
             // };
+
+        case GET_DIALOGS_SUCCESS:
+            return {
+                ...state,dialogsdata:action.payload
+            }
 
 
         case send_message:
@@ -76,12 +84,28 @@ export const sendMessageCreator = (message: string) => ({
     type: send_message, message
 });
 
+export const getDialogsSuccessActionCreator = (data:[]) => ({
+    type:GET_DIALOGS_SUCCESS, payload:data
+})
+
 // export const updateMessageCreator = (text) => ({
 //     type: update_message, textmessage: text
 // });
 
 
+export const getDialogsThunkCreator = () => async (dispatch: Function) => {
+   let data = await dialogAPI.getDialogs();
+   dispatch(getDialogsSuccessActionCreator(data))
+
+
+};
+
+
 export default dialoReducer;
+
+
+
+
 
 
 // let send_message = "SEND-MESSAGE";
