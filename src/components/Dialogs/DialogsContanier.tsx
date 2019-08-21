@@ -1,4 +1,9 @@
-import {getDialogsThunkCreator} from "../../redux/dialogs-reducer";
+import {
+    getDialogsThunkCreator,
+    startDialogThunkCreator,
+    selectDialogActionCreator,
+    getMessagesThunkCreator
+} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import React from "react";
@@ -8,9 +13,34 @@ import { withRouter } from "react-router";
 class DialogsContanier extends React.Component <any> {
 
     componentDidMount(): void {
+        let userId = this.props.match.params.userId;
+        if (!!userId) {
+            this.props.startDialog(userId);
+            this.props.getMessages(userId);
+            this.props.stSelectDialog(userId);
+
+        }
+
         this.props.getDialogs();
 
 
+
+    }
+
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<{}>, snapshot?: any): void {
+        if (prevProps.match.params.userId !== this.props.match.params.userId) {
+            let userId = this.props.match.params.userId;
+            if (!!userId) {
+                // this.props.startDialog(userId);
+                this.props.getMessages(userId);
+                this.props.stSelectDialog(userId);
+            }
+            else {
+                this.props.stSelectDialog(null)
+            }
+
+
+        }
     }
 
     render() {
@@ -53,6 +83,8 @@ const mapStateToProps = (state: any) => {
 // let redirect = WithAthREdirect(Dialogs);
 export default compose <any, any,any>  (withRouter,
 
-connect(mapStateToProps, {getDialogs:getDialogsThunkCreator}))(DialogsContanier);
+connect(mapStateToProps, {getDialogs:getDialogsThunkCreator,
+    startDialog: startDialogThunkCreator, stSelectDialog:selectDialogActionCreator,
+    getMessages:getMessagesThunkCreator}))(DialogsContanier);
 
 

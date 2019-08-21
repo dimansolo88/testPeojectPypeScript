@@ -114,7 +114,7 @@ export const dialogAPI = {
         )
     },
 
-    startDialog (userId:number) {
+    startDialog (userId:any) {
         return instance.put(`dialogs/${userId}`).then(
             response => response.data
         )

@@ -3,7 +3,9 @@ import { dialogAPI } from "../API/API";
 let send_message = "SEND-MESSAGE";
 // let update_message = "UPDATE-MESSAGE";
 let GET_DIALOGS_SUCCESS = "GET_DIALOGS";
-
+let PUT_UP_DIALOG = "PUT_UP_DIALOG";
+let SET_SELECT_DIALOG_ID = "SET_SELECT_DIALOG_ID";
+let GET_MESSAGES_SUCCESS ="GET_MESSAGES_SUCCESS"
 
 let initialstate = {
 
@@ -16,15 +18,17 @@ let initialstate = {
     ],
 
     messagesdata: [
-        {id: "1", message: "hi",},
-        {id: "2", message: "Hi gays",},
-        {id: "3", message: "shit",},
-        {id: "4", message: "hi i am herman",},
-        {id: "5", message: "hi am timur",},
+        // {id: "1", message: "hi",},
+        // {id: "2", message: "Hi gays",},
+        // {id: "3", message: "shit",},
+        // {id: "4", message: "hi i am herman",},
+        // {id: "5", message: "hi am timur",},
     ],
 
 
     // textmessage: "",
+
+    selectDialogID: null,
 
 
 };
@@ -44,7 +48,27 @@ const dialoReducer = (state = initialstate, action: any) => {
         case GET_DIALOGS_SUCCESS:
             return {
                 ...state,dialogsdata:action.payload
-            }
+            };
+
+        case PUT_UP_DIALOG:
+            return {
+                ...state,dialogsdata: [state.dialogsdata.find((d:{id:number}) => d.id == action.userId)],
+                    ...state.dialogsdata.filter((d:{id:number}) => d.id !== action.userId)
+            };
+
+        case SET_SELECT_DIALOG_ID:
+            return {
+                ...state,selectDialogID: action.payload
+            };
+
+        case GET_MESSAGES_SUCCESS:
+            return {
+                ...state,messagesdata: action.payload
+            };
+
+
+
+
 
 
         case send_message:
@@ -54,6 +78,8 @@ const dialoReducer = (state = initialstate, action: any) => {
                 // textmessage: "",
                 messagesdata: [...state.messagesdata, {id: 6, message: textmessage}]
             };
+
+
 
         // stateCopy.textmessage = "";
         // stateCopy.messagesdata.push({id: 6, message: textmessage});
@@ -93,12 +119,43 @@ export const getDialogsSuccessActionCreator = (data:[]) => ({
 // });
 
 
+export const putUpActionCreator = (userId:any) => ({
+    type: PUT_UP_DIALOG, userId
+})
+
+
+export const selectDialogActionCreator = (userId:number)=> ({
+    type:SET_SELECT_DIALOG_ID, payload:userId
+})
+
+export const getMessagesSuccessActionCreator = (messages: string) => ({
+    type:GET_MESSAGES_SUCCESS, payload:messages
+})
+
+
 export const getDialogsThunkCreator = () => async (dispatch: Function) => {
    let data = await dialogAPI.getDialogs();
    dispatch(getDialogsSuccessActionCreator(data))
 
 
 };
+
+
+export const startDialogThunkCreator = (userId:any) => async (dispatch:Function, getState:Function) => {
+    return await dialogAPI.startDialog(userId);
+    const dialogs = getState().dialogspages.dialogsdata.find((d: { id: any; }) => d.id == userId );
+    if(dialogs)
+        dispatch(putUpActionCreator(userId));
+    else
+        getDialogsThunkCreator()
+}
+
+
+export const getMessagesThunkCreator = (userId:number) => async (dispatch:Function) => {
+    let messages =  await dialogAPI.getMessages(userId);
+    dispatch(getMessagesSuccessActionCreator(messages))
+}
+
 
 
 export default dialoReducer;
