@@ -8,7 +8,9 @@ import Dialosmessage from "./Dialosmessage/Dialosmessage";
 interface iprops {
     add: Function,
     state: any,
-    messageData:any[]
+    messageData:any[],
+    sendMessage:Function,
+    match:any,
 
 
 }
@@ -18,7 +20,9 @@ const Dialogs = (props: iprops) => {
 
     const onSubmit = (data: any) => {
         console.log(data);
-        props.add(data.dialogSendMessage)
+        props.sendMessage(props.match.params.userId,data.dialogSendMessage)
+
+        // props.add(data.dialogSendMessage)
 
     };
 

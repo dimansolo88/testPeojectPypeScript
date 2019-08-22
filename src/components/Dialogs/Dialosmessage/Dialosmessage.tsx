@@ -19,7 +19,7 @@ const Dialosmessage = (props: Iprops) => {
                 messages
             </div>
 
-            {props.messageData.map((mess: { body:string, id: number }) => <div key={mess.id}>
+            {props.messageData.map((mess: { body:string, id: any }) => <div key={mess.id}>
                 <div>
                     {mess.body}
 

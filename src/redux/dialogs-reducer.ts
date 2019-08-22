@@ -5,7 +5,8 @@ let send_message = "SEND-MESSAGE";
 let GET_DIALOGS_SUCCESS = "GET_DIALOGS";
 let PUT_UP_DIALOG = "PUT_UP_DIALOG";
 let SET_SELECT_DIALOG_ID = "SET_SELECT_DIALOG_ID";
-let GET_MESSAGES_SUCCESS ="GET_MESSAGES_SUCCESS"
+let GET_MESSAGES_SUCCESS ="GET_MESSAGES_SUCCESS";
+
 
 let initialstate = {
 
@@ -51,9 +52,14 @@ const dialoReducer = (state = initialstate, action: any) => {
             };
 
         case PUT_UP_DIALOG:
+            // return {
+            //     ...state,dialogsdata: [state.dialogsdata.find((d:{id:any}) => d.id == action.userId)],
+            //         ...state.dialogsdata.filter((d:{id:any}) => d.id != action.userId)
+            // };
+
             return {
-                ...state,dialogsdata: [state.dialogsdata.find((d:{id:number}) => d.id == action.userId)],
-                    ...state.dialogsdata.filter((d:{id:number}) => d.id !== action.userId)
+                ...state, dialogsdata: [state.dialogsdata.find((d:{id:any}) => d.id == action.userId),
+                    ...state.dialogsdata.filter((d: {id:any}) => d.id != action.userId)]
             };
 
         case SET_SELECT_DIALOG_ID:
@@ -66,17 +72,12 @@ const dialoReducer = (state = initialstate, action: any) => {
                 ...state,messagesdata: action.payload
             };
 
-
-
-
-
-
         case send_message:
-            let textmessage = action.message;
+            // let textmessage = action.message;
             return {
                 ...state,
                 // textmessage: "",
-                messagesdata: [...state.messagesdata, {id: 6, message: textmessage}]
+                messagesdata:[...state.messagesdata,action.payload]
             };
 
 
@@ -107,12 +108,12 @@ const dialoReducer = (state = initialstate, action: any) => {
 
 
 export const sendMessageCreator = (message: string) => ({
-    type: send_message, message
+    type: send_message, payload: message
 });
 
 export const getDialogsSuccessActionCreator = (data:[]) => ({
     type:GET_DIALOGS_SUCCESS, payload:data
-})
+});
 
 // export const updateMessageCreator = (text) => ({
 //     type: update_message, textmessage: text
@@ -143,7 +144,7 @@ export const getDialogsThunkCreator = () => async (dispatch: Function) => {
 
 export const startDialogThunkCreator = (userId:any) => async (dispatch:Function, getState:Function) => {
     return await dialogAPI.startDialog(userId);
-    const dialogs = getState().dialogspages.dialogsdata.find((d: { id: any; }) => d.id == userId );
+    const dialogs = getState().dialogspages.dialogsdata.find((d: { id: any; }) => d.id = userId );
     if(dialogs)
         dispatch(putUpActionCreator(userId));
     else
@@ -155,6 +156,17 @@ export const getMessagesThunkCreator = (userId:number) => async (dispatch:Functi
     let messages =  await dialogAPI.getMessages(userId);
     dispatch(getMessagesSuccessActionCreator(messages))
 }
+
+export const sendMessageThunkCreator = (userId:any, body:string) => async (dispatch:Function) => {
+    let message =  await dialogAPI.sendMessages(userId,body)
+    if (message.resultCode == 0) {
+        dispatch(sendMessageCreator(message.data.message))
+        dispatch(putUpActionCreator(userId))
+    }
+
+}
+
+
 
 
 

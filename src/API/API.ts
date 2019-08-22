@@ -125,8 +125,8 @@ export const dialogAPI = {
             response => response.data.items)
     },
 
-    sendMessages (userId:number, body:string) {
-        return  instance.post(`dialogs/${userId}`, {body}).then(
+    sendMessages (userId:any, body:string) {
+        return  instance.post(`dialogs/${userId}/messages`, {body}).then(
             response => response.data)
     }
 
