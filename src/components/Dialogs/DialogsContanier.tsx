@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import React from "react";
 import {compose} from "redux";
 import { withRouter } from "react-router";
+import {getSelectDialogId} from "../../redux/Selectors/DialogsSelector";
 
 class DialogsContanier extends React.Component <any> {
 
@@ -66,6 +67,8 @@ const mapStateToProps = (state: any) => {
         state: state.dialogspages,
         isAuth: state.auth.isAuth,
         messageData:state.dialogspages.messagesdata,
+        // selectDialogID:state.dialogspages.selectDialogID,
+        selectDialogID: getSelectDialogId(state)
 
 }
 

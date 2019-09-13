@@ -1,4 +1,4 @@
-.usersWrapper{
+.usersWrapper {
     color: black;
     font-size: 14px;
     padding-top: 10px;
@@ -8,24 +8,32 @@
 }
 
 
-.avatar{
+.avatar {
     width: 70px;
     height: 70px;
     border-radius: 50px;
 
 }
 
-.numberLInk{
-    font-weight: bolder;
-    font-size: large;
-    cursor: pointer;
-
-
+.wrapperPaginator {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
 }
 
-.pageHover:hover{
-    cursor: pointer;
-}
+
+/*.numberLInk{*/
+/*    font-weight: bolder;*/
+/*    font-size: large;*/
+/*    cursor: pointer;*/
+
+
+/*}*/
+
+/*.pageHover:hover{*/
+/*    cursor: pointer;*/
+
+/*}*/
 
 
 

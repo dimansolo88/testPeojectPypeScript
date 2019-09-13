@@ -10,31 +10,47 @@ const minLength2 = minLengthCreator(2);
 
 
 const AddMessageForm = (props: any) => {
+
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div className={p.send}>
 
-                <Field  component={Textarea} validate={[maxlength5,minLength2]} name={"dialogSendMessage"}
-                        placeholder={"enter you message"}/>
 
+
+
+
+            <form onSubmit={props.handleSubmit}>
+
+                { !props.selectDialogID && <div>
+
+                    Please select dialog
+
+                    </div>}
+
+                {props.selectDialogID &&
 
                 <div className={p.send}>
 
-                    <button>send message</button>
-
-                </div>
-
-            </div>
+                    <Field component={Textarea} validate={[maxlength5, minLength2]} name={"dialogSendMessage"}
+                           placeholder={"enter you message"}/>
 
 
-        </form>
+                    <div className={p.send}>
+
+                        <button>send message</button>
+
+                    </div>
+
+                </div>}
+
+            </form>
+
+
 
 
     )
 };
 
 
-export const AddMessageReduxForm = reduxForm ({form: 'dialog-message-form'}) (AddMessageForm);
+export const AddMessageReduxForm = reduxForm({form: 'dialog-message-form'})(AddMessageForm);
 
 // export default AddMessageForm;
 

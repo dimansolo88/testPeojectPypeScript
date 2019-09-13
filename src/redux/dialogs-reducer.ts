@@ -125,7 +125,7 @@ export const putUpActionCreator = (userId:any) => ({
 })
 
 
-export const selectDialogActionCreator = (userId:number)=> ({
+export const selectDialogActionCreator = (userId:any)=> ({
     type:SET_SELECT_DIALOG_ID, payload:userId
 })
 

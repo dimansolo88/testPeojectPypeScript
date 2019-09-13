@@ -11,6 +11,8 @@ interface iprops {
     messageData:any[],
     sendMessage:Function,
     match:any,
+    selectDialogID:any
+
 
 
 }
@@ -36,6 +38,7 @@ const Dialogs = (props: iprops) => {
 
 
 
+    // @ts-ignore
     return (
         <div className={p.dialogs}>
             <div className={p.dialogsitems}>
@@ -49,13 +52,14 @@ const Dialogs = (props: iprops) => {
 
             <div className={p.messages}>
 
-                <Dialosmessage messageData={props.messageData} />
+                <Dialosmessage  messageData={props.messageData} />
 
 
 
 
 
-                <AddMessageReduxForm onSubmit={onSubmit}/>
+                // @ts-ignore
+                <AddMessageReduxForm   selectDialogID={props.selectDialogID} onSubmit={onSubmit}/>
 
 
             </div>
